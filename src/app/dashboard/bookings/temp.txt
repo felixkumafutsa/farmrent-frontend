@@ -1,0 +1,7 @@
+        
+        Swal.fire({
+          icon: 'error',
+          title: 'Cancellation Failed',
+          text: errorData.message || 'Failed to cancel booking',
+          confirmButtonColor: '#ef4444'
+        });
