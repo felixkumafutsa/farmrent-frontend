@@ -44,7 +44,7 @@ export default function AdminEquipmentPage() {
         return;
       }
       
-      const response = await fetch('${API_URL}/equipment', {
+      const response = await fetch(`${API_URL}/equipment`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

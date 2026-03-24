@@ -142,7 +142,7 @@ export default function EquipmentDetailsPage() {
       }
 
       // Find a completed booking for this equipment
-      const bookingsResponse = await fetch('${API_URL}/bookings', {
+      const bookingsResponse = await fetch(`${API_URL}/bookings`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -166,7 +166,7 @@ export default function EquipmentDetailsPage() {
           return;
         }
 
-        const response = await fetch('${API_URL}/reviews', {
+        const response = await fetch(`${API_URL}/reviews`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

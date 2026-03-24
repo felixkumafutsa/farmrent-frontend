@@ -62,7 +62,7 @@ export default function ReviewsPage() {
         return;
       }
       
-      const response = await fetch('${API_URL}/reviews/vendor', {
+      const response = await fetch(`${API_URL}/reviews/vendor`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -77,7 +77,7 @@ export default function ReviewsPage() {
       }
 
       // Fetch vendor stats
-      const statsResponse = await fetch('${API_URL}/reviews/vendor/stats', {
+      const statsResponse = await fetch(`${API_URL}/reviews/vendor/stats`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

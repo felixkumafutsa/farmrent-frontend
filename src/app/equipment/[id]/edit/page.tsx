@@ -74,7 +74,7 @@ export default function EditEquipmentPage() {
   const fetchCategories = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('${API_URL}/categories', {
+      const response = await fetch(`${API_URL}/categories`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

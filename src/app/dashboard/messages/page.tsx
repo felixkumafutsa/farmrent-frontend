@@ -70,7 +70,7 @@ export default function MessagesPage() {
         return;
       }
       
-      const response = await fetch('${API_URL}/messages', {
+      const response = await fetch(`${API_URL}/messages`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -105,7 +105,7 @@ export default function MessagesPage() {
   const fetchUnreadCount = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('${API_URL}/messages/unread/count', {
+      const response = await fetch(`${API_URL}/messages/unread/count`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -144,7 +144,7 @@ export default function MessagesPage() {
 
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('${API_URL}/messages', {
+      const response = await fetch(`${API_URL}/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

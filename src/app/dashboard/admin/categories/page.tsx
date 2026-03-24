@@ -51,7 +51,7 @@ export default function AdminCategoriesPage() {
     try {
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch('${API_URL}/categories', {
+      const response = await fetch(`${API_URL}/categories`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -76,7 +76,7 @@ export default function AdminCategoriesPage() {
     try {
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch('${API_URL}/categories/stats', {
+      const response = await fetch(`${API_URL}/categories/stats`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -119,7 +119,7 @@ export default function AdminCategoriesPage() {
         }
       } else {
         // Create new category
-        const response = await fetch('${API_URL}/categories', {
+        const response = await fetch(`${API_URL}/categories`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -98,7 +98,7 @@ export default function BookingDetailsPage() {
         return;
       }
 
-      const response = await fetch('${API_URL}/reviews', {
+      const response = await fetch(`${API_URL}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

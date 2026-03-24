@@ -25,7 +25,7 @@ export default function RentalsPage() {
   const fetchRentals = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('${API_URL}/rentals', {
+      const response = await fetch(`${API_URL}/rentals`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

@@ -39,7 +39,7 @@ export default function CreateEquipmentPage() {
   const fetchCategories = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('${API_URL}/categories', {
+      const response = await fetch(`${API_URL}/categories`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -134,7 +134,7 @@ export default function CreateEquipmentPage() {
         ...(user?.role === 'VENDOR' && { vendorId: user.id }),
       };
 
-      const response = await fetch('${API_URL}/equipment', {
+      const response = await fetch(`${API_URL}/equipment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

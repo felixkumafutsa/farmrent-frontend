@@ -135,7 +135,7 @@ export default function BookEquipmentPage() {
       console.log('Sending booking data:', bookingData);
       console.log('Authorization token exists:', !!token);
       
-      const response = await fetch('${API_URL}/bookings', {
+      const response = await fetch(`${API_URL}/bookings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

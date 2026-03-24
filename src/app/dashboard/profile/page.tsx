@@ -61,7 +61,7 @@ export default function ProfilePage() {
 
       // Fetch vendor profile if user is a vendor
       if (currentUser.role === 'VENDOR') {
-        const response = await fetch('${API_URL}/users/profile/vendor', {
+        const response = await fetch(`${API_URL}/users/profile/vendor`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -83,7 +83,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch('${API_URL}/users/profile', {
+      const response = await fetch(`${API_URL}/users/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

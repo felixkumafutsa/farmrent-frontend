@@ -45,7 +45,7 @@ export default function BookingsPage() {
         return;
       }
       
-      const response = await fetch('${API_URL}/bookings', {
+      const response = await fetch(`${API_URL}/bookings`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
