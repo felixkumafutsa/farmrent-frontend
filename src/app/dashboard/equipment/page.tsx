@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import DashboardLayout from '@/components/DashboardLayout';
 import Swal from 'sweetalert2';
+import { API_URL } from '@/lib/api';
 
 export default function EquipmentPage() {
   const [equipment, setEquipment] = useState<any[]>([]);
@@ -31,7 +32,7 @@ export default function EquipmentPage() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:3001/categories');
+      const response = await fetch(`${API_URL}/categories`);
       if (response.ok) {
         const data = await response.json();
         setCategories(data);
@@ -104,15 +105,15 @@ export default function EquipmentPage() {
         return;
       }
       
-      let apiUrl = 'http://localhost:3001/equipment';
+      let apiUrl = `${API_URL}/equipment`;
       
       // Context-aware fetching based on user role
       if (currentUser?.role === 'VENDOR') {
         // Vendors should only see their own equipment
-        apiUrl = 'http://localhost:3001/equipment/my-equipment';
+        apiUrl = `${API_URL}/equipment/my`;
       } else if (currentUser?.role === 'FARMER') {
         // Farmers should see available equipment for rent
-        apiUrl = 'http://localhost:3001/equipment?status=AVAILABLE';
+        apiUrl = `${API_URL}/equipment?status=AVAILABLE`;
       }
       // ADMIN sees all equipment (default)
 
