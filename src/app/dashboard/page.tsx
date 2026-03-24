@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import DashboardLayout from '@/components/DashboardLayout';
+import { API_URL } from '@/lib/api';
+
 
 export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);

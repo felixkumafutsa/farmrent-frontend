@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import DashboardLayout from '@/components/DashboardLayout';
 import Swal from 'sweetalert2';
+import { API_URL } from '@/lib/api';
+
 
 export default function CreateEquipmentPage() {
   const router = useRouter();

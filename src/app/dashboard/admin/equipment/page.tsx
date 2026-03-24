@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
+import { API_URL } from '@/lib/api';
+
 
 export default function AdminEquipmentPage() {
   const [equipment, setEquipment] = useState<any[]>([]);

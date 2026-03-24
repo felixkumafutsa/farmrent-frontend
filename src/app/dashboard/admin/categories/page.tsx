@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
+import { API_URL } from '@/lib/api';
+
 
 interface Category {
   id: string;

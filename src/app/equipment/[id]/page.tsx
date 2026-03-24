@@ -5,6 +5,8 @@ import { useParams, useRouter } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
+import { API_URL } from '@/lib/api';
+
 
 interface Equipment {
   id: string;

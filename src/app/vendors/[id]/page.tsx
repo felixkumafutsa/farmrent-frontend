@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import DashboardLayout from '@/components/DashboardLayout';
+import { API_URL } from '@/lib/api';
+
 
 interface VendorProfile {
   id: string;
