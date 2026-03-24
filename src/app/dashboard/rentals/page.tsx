@@ -3,8 +3,17 @@
 import { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
 
+interface Rental {
+  id: string;
+  equipment: string;
+  startDate: string;
+  endDate: string;
+  status: string;
+  totalCost: number;
+}
+
 export default function RentalsPage() {
-  const [rentals, setRentals] = useState([]);
+  const [rentals, setRentals] = useState<Rental[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
