@@ -133,7 +133,7 @@ export default function EquipmentPage() {
         const equipmentWithRatings = await Promise.all(
           data.map(async (item: any) => {
             try {
-              const ratingResponse = await fetch(`http://localhost:3001/reviews/vendor/${item.vendorId}/stats`);
+              const ratingResponse = await fetch(`${API_URL}/reviews/vendor/${item.vendorId}/stats`);
               if (ratingResponse.ok) {
                 const ratingData = await ratingResponse.json();
                 return {
@@ -184,7 +184,7 @@ export default function EquipmentPage() {
 
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/equipment/${id}`, {
+      const response = await fetch(`${API_URL}/equipment/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

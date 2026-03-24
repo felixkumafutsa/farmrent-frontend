@@ -51,7 +51,7 @@ export default function UsersPage() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://localhost:3001/users', {
+      const response = await fetch('${API_URL}/users', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -116,7 +116,7 @@ export default function UsersPage() {
     
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://localhost:3001/users/admin/create', {
+      const response = await fetch('${API_URL}/users/admin/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -72,7 +72,7 @@ export default function SettingsPage() {
       
       switch (section) {
         case 'general':
-          endpoint = 'http://localhost:3001/users/settings/general';
+          endpoint = '${API_URL}/users/settings/general';
           data = {
             email: formData.email,
             phone: formData.phone,
@@ -97,18 +97,18 @@ export default function SettingsPage() {
             });
             return;
           }
-          endpoint = 'http://localhost:3001/users/settings/password';
+          endpoint = '${API_URL}/users/settings/password';
           data = {
             currentPassword: formData.currentPassword,
             newPassword: formData.newPassword,
           };
           break;
         case 'notifications':
-          endpoint = 'http://localhost:3001/users/settings/notifications';
+          endpoint = '${API_URL}/users/settings/notifications';
           data = formData.notifications;
           break;
         case 'privacy':
-          endpoint = 'http://localhost:3001/users/settings/privacy';
+          endpoint = '${API_URL}/users/settings/privacy';
           data = formData.privacy;
           break;
       }

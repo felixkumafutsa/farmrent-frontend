@@ -68,7 +68,7 @@ export default function MessagesPage() {
         return;
       }
       
-      const response = await fetch('http://localhost:3001/messages', {
+      const response = await fetch('${API_URL}/messages', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -103,7 +103,7 @@ export default function MessagesPage() {
   const fetchUnreadCount = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://localhost:3001/messages/unread/count', {
+      const response = await fetch('${API_URL}/messages/unread/count', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -121,7 +121,7 @@ export default function MessagesPage() {
   const fetchConversation = async (otherUser: User) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/messages/conversation/${otherUser.id}`, {
+      const response = await fetch(`${API_URL}/messages/conversation/${otherUser.id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -142,7 +142,7 @@ export default function MessagesPage() {
 
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://localhost:3001/messages', {
+      const response = await fetch('${API_URL}/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ export default function MessagesPage() {
   const markAsRead = async (messageId: string) => {
     try {
       const token = localStorage.getItem('access_token');
-      await fetch(`http://localhost:3001/messages/${messageId}/read`, {
+      await fetch(`${API_URL}/messages/${messageId}/read`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

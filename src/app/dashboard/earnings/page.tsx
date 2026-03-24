@@ -72,7 +72,7 @@ export default function EarningsPage() {
         return;
       }
       
-      const response = await fetch(`http://localhost:3001/earnings/vendor?period=${selectedPeriod}`, {
+      const response = await fetch(`${API_URL}/earnings/vendor?period=${selectedPeriod}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

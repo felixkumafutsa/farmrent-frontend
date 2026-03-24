@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { API_URL } from '@/lib/api';
 import { mockEquipment } from '@/lib/mockData';
 
 interface Equipment {
@@ -36,7 +37,7 @@ export default function EquipmentPage() {
 
   const fetchEquipment = async () => {
     try {
-      const response = await fetch('http://localhost:3001/equipment');
+      const response = await fetch(`${API_URL}/equipment`);
       if (response.ok) {
         const data = await response.json();
         setEquipment(data);

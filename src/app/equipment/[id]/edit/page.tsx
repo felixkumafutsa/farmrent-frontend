@@ -34,7 +34,7 @@ export default function EditEquipmentPage() {
   const fetchEquipment = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/equipment/${id}`, {
+      const response = await fetch(`${API_URL}/equipment/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -72,7 +72,7 @@ export default function EditEquipmentPage() {
   const fetchCategories = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://localhost:3001/categories', {
+      const response = await fetch('${API_URL}/categories', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -93,7 +93,7 @@ export default function EditEquipmentPage() {
 
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/equipment/${id}`, {
+      const response = await fetch(`${API_URL}/equipment/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

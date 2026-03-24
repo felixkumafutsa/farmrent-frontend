@@ -42,7 +42,7 @@ export default function AdminEquipmentPage() {
         return;
       }
       
-      const response = await fetch('http://localhost:3001/equipment', {
+      const response = await fetch('${API_URL}/equipment', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -115,7 +115,7 @@ export default function AdminEquipmentPage() {
 
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/equipment/${equipmentId}`, {
+      const response = await fetch(`${API_URL}/equipment/${equipmentId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

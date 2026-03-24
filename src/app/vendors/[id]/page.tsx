@@ -66,7 +66,7 @@ export default function VendorProfilePage() {
     try {
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch(`http://localhost:3001/vendors/${vendorId}`, {
+      const response = await fetch(`${API_URL}/vendors/${vendorId}`, {
         headers: token ? {
           'Authorization': `Bearer ${token}`,
         } : {},
@@ -85,7 +85,7 @@ export default function VendorProfilePage() {
 
   const fetchVendorReviews = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/reviews/vendor/${vendorId}`);
+      const response = await fetch(`${API_URL}/reviews/vendor/${vendorId}`);
       
       if (response.ok) {
         const data = await response.json();
@@ -93,7 +93,7 @@ export default function VendorProfilePage() {
       }
 
       // Fetch review stats
-      const statsResponse = await fetch(`http://localhost:3001/reviews/vendor/${vendorId}/stats`);
+      const statsResponse = await fetch(`${API_URL}/reviews/vendor/${vendorId}/stats`);
       if (statsResponse.ok) {
         const statsData = await statsResponse.json();
         setReviewStats(statsData);

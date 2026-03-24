@@ -67,7 +67,7 @@ export default function BookingDetailsPage() {
     try {
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch(`http://localhost:3001/bookings/${bookingId}`, {
+      const response = await fetch(`${API_URL}/bookings/${bookingId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -97,7 +97,7 @@ export default function BookingDetailsPage() {
         return;
       }
 
-      const response = await fetch('http://localhost:3001/reviews', {
+      const response = await fetch('${API_URL}/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -45,7 +45,7 @@ export default function BookEquipmentPage() {
   const fetchEquipment = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/equipment/${equipmentId}`, {
+      const response = await fetch(`${API_URL}/equipment/${equipmentId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -133,7 +133,7 @@ export default function BookEquipmentPage() {
       console.log('Sending booking data:', bookingData);
       console.log('Authorization token exists:', !!token);
       
-      const response = await fetch('http://localhost:3001/bookings', {
+      const response = await fetch('${API_URL}/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

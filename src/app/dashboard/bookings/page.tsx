@@ -44,7 +44,7 @@ export default function BookingsPage() {
         return;
       }
       
-      const response = await fetch('http://localhost:3001/bookings', {
+      const response = await fetch('${API_URL}/bookings', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -113,7 +113,7 @@ export default function BookingsPage() {
   const handleConfirm = async (bookingId: string) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/bookings/${bookingId}/confirm`, {
+      const response = await fetch(`${API_URL}/bookings/${bookingId}/confirm`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -150,7 +150,7 @@ export default function BookingsPage() {
   const handleReject = async (bookingId: string) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/bookings/${bookingId}/reject`, {
+      const response = await fetch(`${API_URL}/bookings/${bookingId}/reject`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -191,7 +191,7 @@ export default function BookingsPage() {
 
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://localhost:3001/bookings/${bookingId}/cancel`, {
+      const response = await fetch(`${API_URL}/bookings/${bookingId}/cancel`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

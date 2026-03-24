@@ -85,7 +85,7 @@ export default function EquipmentDetailsPage() {
     try {
       const token = localStorage.getItem('access_token');
       
-      const response = await fetch(`http://localhost:3001/equipment/${equipmentId}`, {
+      const response = await fetch(`${API_URL}/equipment/${equipmentId}`, {
         headers: token ? {
           'Authorization': `Bearer ${token}`,
         } : {},
@@ -104,7 +104,7 @@ export default function EquipmentDetailsPage() {
 
   const fetchReviews = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/reviews/equipment/${equipmentId}`);
+      const response = await fetch(`${API_URL}/reviews/equipment/${equipmentId}`);
       
       if (response.ok) {
         const data = await response.json();
@@ -112,7 +112,7 @@ export default function EquipmentDetailsPage() {
       }
 
       // Fetch review stats
-      const statsResponse = await fetch(`http://localhost:3001/reviews/equipment/${equipmentId}/stats`);
+      const statsResponse = await fetch(`${API_URL}/reviews/equipment/${equipmentId}/stats`);
       if (statsResponse.ok) {
         const statsData = await statsResponse.json();
         setReviewStats(statsData);
@@ -140,7 +140,7 @@ export default function EquipmentDetailsPage() {
       }
 
       // Find a completed booking for this equipment
-      const bookingsResponse = await fetch('http://localhost:3001/bookings', {
+      const bookingsResponse = await fetch('${API_URL}/bookings', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -164,7 +164,7 @@ export default function EquipmentDetailsPage() {
           return;
         }
 
-        const response = await fetch('http://localhost:3001/reviews', {
+        const response = await fetch('${API_URL}/reviews', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

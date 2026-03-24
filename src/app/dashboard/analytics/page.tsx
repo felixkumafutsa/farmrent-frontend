@@ -60,7 +60,7 @@ export default function AnalyticsPage() {
         return;
       }
       
-      const response = await fetch(`http://localhost:3001/earnings/admin?period=${selectedPeriod}`, {
+      const response = await fetch(`${API_URL}/earnings/admin?period=${selectedPeriod}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
