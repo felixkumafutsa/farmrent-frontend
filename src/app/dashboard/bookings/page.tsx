@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import DashboardLayout from '@/components/DashboardLayout';
 import Swal from 'sweetalert2';
+import { API_URL } from '@/lib/api';
 
 export default function BookingsPage() {
   const [bookings, setBookings] = useState<any[]>([]);
