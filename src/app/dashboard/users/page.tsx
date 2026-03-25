@@ -14,6 +14,11 @@ interface User {
   role: string;
   status?: string;
   createdAt?: string;
+  stats?: {
+    totalEquipment?: number;
+    totalBookings?: number;
+    totalRevenue?: number;
+  };
 }
 
 interface CreateUserDto {
@@ -61,15 +66,41 @@ export default function UsersPage() {
 
       if (response.ok) {
         const data = await response.json();
-        setUsers(data);
+        
+        // For vendors, fetch their analytics
+        const usersWithStats = await Promise.all(
+          data.map(async (user: User) => {
+            if (user.role === 'VENDOR') {
+              try {
+                const analyticsResponse = await fetch(`${API_URL}/users/vendors/${user.id}/analytics`, {
+                  headers: {
+                    'Authorization': `Bearer ${token}`,
+                  },
+                });
+                
+                if (analyticsResponse.ok) {
+                  const analytics = await analyticsResponse.json();
+                  return { ...user, stats: analytics.stats };
+                }
+              } catch (error) {
+                console.error('Error fetching vendor analytics:', error);
+              }
+            }
+            return user;
+          })
+        );
+        
+        setUsers(usersWithStats);
       } else {
         // Mock data for now
         const mockUsers = [
           { id: '1', email: 'admin@farmrent.com', firstName: 'Admin', lastName: 'User', role: 'ADMIN', status: 'ACTIVE', createdAt: '2024-01-15' },
           { id: '2', email: 'farmer@farmrent.com', firstName: 'John', lastName: 'Farmer', role: 'FARMER', status: 'ACTIVE', createdAt: '2024-01-20' },
-          { id: '3', email: 'vendor@farmrent.com', firstName: 'Jane', lastName: 'Vendor', role: 'VENDOR', status: 'ACTIVE', createdAt: '2024-01-25' },
+          { id: '3', email: 'vendor@farmrent.com', firstName: 'Jane', lastName: 'Vendor', role: 'VENDOR', status: 'ACTIVE', createdAt: '2024-01-25', 
+            stats: { totalEquipment: 5, totalBookings: 12, totalRevenue: 1500 } },
           { id: '4', email: 'farmer2@farmrent.com', firstName: 'Mike', lastName: 'Smith', role: 'FARMER', status: 'PENDING', createdAt: '2024-02-01' },
-          { id: '5', email: 'vendor2@farmrent.com', firstName: 'Sarah', lastName: 'Jones', role: 'VENDOR', status: 'SUSPENDED', createdAt: '2024-02-05' },
+          { id: '5', email: 'vendor2@farmrent.com', firstName: 'Sarah', lastName: 'Jones', role: 'VENDOR', status: 'SUSPENDED', createdAt: '2024-02-05',
+            stats: { totalEquipment: 3, totalBookings: 8, totalRevenue: 900 } },
         ];
         setUsers(mockUsers);
       }
@@ -392,6 +423,15 @@ export default function UsersPage() {
                       Status
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Products
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Orders
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Revenue
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Joined
                     </th>
                     <th scope="col" className="relative px-6 py-3">
@@ -402,7 +442,7 @@ export default function UsersPage() {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredUsers.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
+                      <td colSpan={8} className="px-6 py-12 text-center text-gray-500">
                         No users found matching your criteria.
                       </td>
                     </tr>
@@ -447,8 +487,35 @@ export default function UsersPage() {
                             {user.status || 'ACTIVE'}
                           </span>
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {user.role === 'VENDOR' ? (
+                            <div className="text-sm text-gray-900">
+                              {user.stats?.totalEquipment || 0}
+                            </div>
+                          ) : (
+                            <div className="text-sm text-gray-400">-</div>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {user.role === 'VENDOR' ? (
+                            <div className="text-sm text-gray-900">
+                              {user.stats?.totalBookings || 0}
+                            </div>
+                          ) : (
+                            <div className="text-sm text-gray-400">-</div>
+                          )}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {user.role === 'VENDOR' ? (
+                            <div className="text-sm font-medium text-gray-900">
+                              ${user.stats?.totalRevenue?.toFixed(2) || '0.00'}
+                            </div>
+                          ) : (
+                            <div className="text-sm text-gray-400">-</div>
+                          )}
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
+                          {new Date(user.createdAt || '').toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button className="text-indigo-600 hover:text-indigo-900 mr-3">
