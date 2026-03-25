@@ -4,22 +4,17 @@ import { useState, useEffect } from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
 import { API_URL } from '@/lib/api';
 
-
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: string;
-}
-
 interface Review {
   id: string;
   rating: number;
   comment: string;
   createdAt: string;
-  booking: {
+  user: {
     id: string;
+    firstName: string;
+    lastName: string;
+  };
+  booking: {
     equipment: {
       id: string;
       name: string;
@@ -29,6 +24,26 @@ interface Review {
       firstName: string;
       lastName: string;
     };
+  };
+}
+
+interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+}
+
+interface ReviewStats {
+  averageRating: number;
+  totalReviews: number;
+  ratingDistribution: {
+    5: number;
+    4: number;
+    3: number;
+    2: number;
+    1: number;
   };
 }
 
@@ -62,30 +77,37 @@ export default function ReviewsPage() {
         return;
       }
       
-      const response = await fetch(`${API_URL}/reviews/vendor`, {
+      // Fetch vendor reviews
+      const reviewsResponse = await fetch(`${API_URL}/reviews/vendor/${currentUser.id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setReviews(data || []);
+      // Fetch vendor stats
+      const statsResponse = await fetch(`${API_URL}/reviews/vendor/${currentUser.id}/stats`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (reviewsResponse.ok) {
+        const reviewsData = await reviewsResponse.json();
+        setReviews(reviewsData || []);
       } else {
-        console.error('Failed to fetch reviews:', response.status);
+        console.error('Failed to fetch reviews:', reviewsResponse.status);
         setReviews([]);
       }
 
-      // Fetch vendor stats
-      const statsResponse = await fetch(`${API_URL}/reviews/vendor/stats`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
       if (statsResponse.ok) {
         const statsData = await statsResponse.json();
-        setStats(statsData || stats);
+        setStats(statsData || {
+          averageRating: 0,
+          totalReviews: 0,
+          ratingDistribution: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
+        });
+      } else {
+        console.error('Failed to fetch stats:', statsResponse.status);
       }
     } catch (error) {
       console.error('Error fetching reviews:', error);
